@@ -1,7 +1,7 @@
 commitFormat: angular
 title: "twitch-lichess-predictions release"
 branch:
-  master: release
+  main: release
 changelog:
   printAll: false
 release: 'github'
