@@ -4,10 +4,10 @@ branch:
   master: release
 changelog:
   printAll: false
+release: 'github'
 assets:
   - name: ./twitch-lichess-predictions
-  compress: false
-release: 'github'
+    compress: false
 github:
   repo: "twitch-lichess-predictions"
   user: "ferencovonmatterhorn"
