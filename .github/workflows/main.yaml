@@ -1,0 +1,25 @@
+name: Go
+on: [ push, pull_request ]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+
+      - name: Init go-semantic-release
+        run: |
+          wget  https://github.com/Nightapes/go-semantic-release/releases/download/v1.3.0/go-semantic-release
+          chmod +x go-semantic-release
+
+      - name: Build binary
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:
+          CGO_ENABLED=0 go build -o twitch-lichess-predictions
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./go-semantic-release release --loglevel trace

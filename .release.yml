@@ -1,0 +1,13 @@
+commitFormat: angular
+title: "twitch-lichess-predictions release"
+branch:
+  master: release
+changelog:
+  printAll: false
+assets:
+  - name: ./twitch-lichess-predictions
+  compress: false
+release: 'github'
+github:
+  repo: "twitch-lichess-predictions"
+  user: "ferencovonmatterhorn"
