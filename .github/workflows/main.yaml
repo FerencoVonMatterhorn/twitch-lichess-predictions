@@ -17,10 +17,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run:
-          GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o build/go-semantic-release.linux_x86_64
-          GOOS=windows GOARCH=386 CGO_ENABLED=0 go build -o build/go-semantic-release.windows_i386.exe
-          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -o build/go-semantic-release.windows_x86_64.exe
-          GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 go build -o build/go-semantic-release.darwin_x86_64
+          GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o twitch-lichess-predictions.linux_x86_64
+          GOOS=windows GOARCH=386 CGO_ENABLED=0 go build -o twitch-lichess-predictions.windows_i386.exe
+          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -o twitch-lichess-predictions.windows_x86_64.exe
+          GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 go build -o twitch-lichess-predictions.darwin_x86_64
 
       - name: Release
         env:
