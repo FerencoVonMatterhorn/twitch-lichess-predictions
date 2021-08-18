@@ -7,7 +7,7 @@ changelog:
 release: 'github'
 assets:
   - name: twitch-lichess-predictions.linux_x86_64
-      compress: true
+    compress: true
   - name: twitch-lichess-predictions.windows_i386.exe
     compress: true
   - name: twitch-lichess-predictions.windows_x86_64.exe
