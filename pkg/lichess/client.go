@@ -16,11 +16,11 @@ type Client struct {
 	HTTPClient *http.Client
 }
 
-func NewClient() *Client {
+func NewClient(username string, apiKey string) *Client {
 	return &Client{
 		BaseURL:  "https://lichess.org/api",
-		apiKey:   "test",
-		Username: "Ferenco",
+		apiKey:   apiKey,
+		Username: username,
 		HTTPClient: &http.Client{
 			Timeout: time.Minute,
 		},
