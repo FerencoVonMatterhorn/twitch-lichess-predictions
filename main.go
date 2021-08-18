@@ -2,24 +2,28 @@ package main
 
 import (
 	"context"
-	"github.com/ferencovonmatterhorn/twitch-lichess-predictions/pkg/client"
+	"github.com/ferencovonmatterhorn/twitch-lichess-predictions/pkg/config"
+	"github.com/ferencovonmatterhorn/twitch-lichess-predictions/pkg/lichess"
 	log "github.com/sirupsen/logrus"
 )
 
 func main() {
-	log.SetLevel(log.DebugLevel)
 
-	log.Debug("creating new client")
-	c := client.NewClient()
+	conf, err := config.Parse()
+	if err != nil {
+		log.Error(err)
+		return
+	}
+	log.Infof("%s", conf)
 
-	log.Debug("creating fake context")
+	client := lichess.NewClient(conf.Credentials.Username, conf.Credentials.APIKey)
+
 	ctx := context.TODO()
 
-	log.Debug("getting game from lichess api")
-	game, err := c.GetGame(ctx)
+	game, err := client.GetCurrentGameForUser(ctx)
 	if err != nil {
 		return
 		log.Error("Error in main.go")
 	}
-	log.Debugf("current or last game id is %s", game.ID)
+	log.Debugf("Current or last game id for lichess player %s is %s", conf.Credentials.Username, game.ID)
 }
