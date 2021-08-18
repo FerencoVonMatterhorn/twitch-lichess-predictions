@@ -1,4 +1,4 @@
-package client
+package lichess
 
 import (
 	"context"
@@ -6,40 +6,54 @@ import (
 	"fmt"
 	log "github.com/sirupsen/logrus"
 	"net/http"
+	"time"
 )
 
-func (c Client) GetGame(ctx context.Context) (*GameRes, error) {
-	log.Debug("started api call function")
+type Client struct {
+	BaseURL    string
+	apiKey     string
+	Username   string
+	HTTPClient *http.Client
+}
 
-	log.Debug("creating request")
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/user/%s/current-game", c.BaseURL, c.Username), nil)
+func NewClient() *Client {
+	return &Client{
+		BaseURL:  "https://lichess.org/api",
+		apiKey:   "test",
+		Username: "Ferenco",
+		HTTPClient: &http.Client{
+			Timeout: time.Minute,
+		},
+	}
+}
+
+func (client Client) GetCurrentGameForUser(ctx context.Context) (*GameRes, error) {
+	log.Debug("Starting GetCurrentGameForUser function")
+
+	request, err := http.NewRequest("GET", fmt.Sprintf("%s/user/%s/current-game", client.BaseURL, client.Username), nil)
 	if err != nil {
 		return nil, err
 	}
 
-	log.Debug("setting context and headers for the request")
-	req.WithContext(ctx)
-	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.apiKey))
+	request.WithContext(ctx)
+	request.Header.Set("Content-Type", "application/json")
+	request.Header.Set("Accept", "application/json")
+	request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", client.apiKey))
 
-	log.Debug("executing request with http client")
-	res, err := c.HTTPClient.Do(req)
+	result, err := client.HTTPClient.Do(request)
 	if err != nil {
 		return nil, err
 	}
 
-	log.Debugf("request status code is %d", res.StatusCode)
+	defer result.Body.Close()
 
-	defer res.Body.Close()
-
-	if res.StatusCode < http.StatusOK || res.StatusCode >= http.StatusBadRequest {
-		return nil, fmt.Errorf("an error occured, the error code is %d", res.StatusCode)
-		log.Errorf("an error occured, the error code is %d", res.StatusCode)
+	if result.StatusCode < http.StatusOK || result.StatusCode >= http.StatusBadRequest {
+		log.Errorf("An error occured, the error code is %d", result.StatusCode)
+		return nil, err
 	}
 
 	var gameRes GameRes
-	if err := json.NewDecoder(res.Body).Decode(&gameRes); err != nil {
+	if err := json.NewDecoder(result.Body).Decode(&gameRes); err != nil {
 		return nil, err
 	}
 
