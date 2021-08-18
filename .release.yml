@@ -6,8 +6,14 @@ changelog:
   printAll: false
 release: 'github'
 assets:
-  - name: ./twitch-lichess-predictions
-    compress: false
+  - name: twitch-lichess-predictions.linux_x86_64
+      compress: true
+  - name: twitch-lichess-predictions.windows_i386.exe
+    compress: true
+  - name: twitch-lichess-predictions.windows_x86_64.exe
+    compress: true
+  - name: twitch-lichess-predictions.darwin_x86_64
+    compress: true
 github:
   repo: "twitch-lichess-predictions"
   user: "ferencovonmatterhorn"
