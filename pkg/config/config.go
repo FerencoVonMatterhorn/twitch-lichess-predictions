@@ -8,11 +8,22 @@ import (
 )
 
 type Config struct {
-	Credentials LichessCredentials
+	Credentials Credentials
 	Logger      LoggerConfig
 }
 
-type LichessCredentials struct {
+type Credentials struct {
+	LichessCredentials Lichess
+	TwtichCredentials  Twitch
+}
+
+type Twitch struct {
+	APIKey        string
+	ClientId      string
+	BroadcasterId int
+}
+
+type Lichess struct {
 	Username string
 }
 
@@ -21,20 +32,28 @@ type LoggerConfig struct {
 }
 
 func (c Config) String() string {
-	return fmt.Sprintf("Set loglevel to %s and username to %s", c.Logger.Loglevel, c.Credentials.Username)
+	return fmt.Sprintf("Set loglevel to %s and username to %s", c.Logger.Loglevel, c.Credentials.LichessCredentials.Username)
 }
 
 func Parse() (Config, error) {
 	loglevel := flag.String("l", log.InfoLevel.String(), "Set the Loglevel")
-	username := flag.String("u", "", "Set the Lichess User for authentication")
+	username := flag.String("u", "", "Set the Lichess User")
+	apiKey := flag.String("a", "", "Set the API Key for the Twitch API")
+	clientId := flag.String("c", "", "Set the Client-ID for the Twitch API")
+	broadcasterId := flag.Int("b", 0, "Set the broadcaster id for Twitch API")
 	flag.Parse()
 	c := Config{
 		Logger: LoggerConfig{
 			Loglevel: *loglevel,
 		},
-		Credentials: LichessCredentials{
-			Username: *username,
-		},
+		Credentials: struct {
+			LichessCredentials Lichess
+			TwtichCredentials  Twitch
+		}{LichessCredentials: struct{ Username string }{Username: *username}, TwtichCredentials: struct {
+			APIKey        string
+			ClientId      string
+			BroadcasterId int
+		}{APIKey: *apiKey, ClientId: *clientId, BroadcasterId: *broadcasterId}},
 	}
 	return c, setLogLevel(*loglevel)
 }
