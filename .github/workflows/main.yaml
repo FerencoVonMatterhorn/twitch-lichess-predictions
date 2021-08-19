@@ -10,7 +10,7 @@ jobs:
 
       - name: Init go-semantic-release
         run: |
-          wget  wget https://github.com/Nightapes/go-semantic-release/releases/download/v2.0.1/go-semantic-release.linux_x86_64.zip -O go-semantic-release.zip
+          wget https://github.com/Nightapes/go-semantic-release/releases/download/v2.0.1/go-semantic-release.linux_x86_64.zip -O go-semantic-release.zip
           tar -xvf go-semantic-release.zip
           chmod +x go-semantic-release
 
