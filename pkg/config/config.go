@@ -14,7 +14,6 @@ type Config struct {
 
 type LichessCredentials struct {
 	Username string
-	APIKey   string
 }
 
 type LoggerConfig struct {
@@ -28,7 +27,6 @@ func (c Config) String() string {
 func Parse() (Config, error) {
 	loglevel := flag.String("l", log.InfoLevel.String(), "Set the Loglevel")
 	username := flag.String("u", "", "Set the Lichess User for authentication")
-	apikey := flag.String("k", "", "Set the Lichess API Key for authentication")
 	flag.Parse()
 	c := Config{
 		Logger: LoggerConfig{
@@ -36,7 +34,6 @@ func Parse() (Config, error) {
 		},
 		Credentials: LichessCredentials{
 			Username: *username,
-			APIKey:   *apikey,
 		},
 	}
 	return c, setLogLevel(*loglevel)
