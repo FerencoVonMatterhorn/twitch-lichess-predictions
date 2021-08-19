@@ -16,7 +16,7 @@ func main() {
 	}
 	log.Infof("%s", conf)
 
-	client := lichess.NewClient(conf.Credentials.Username, conf.Credentials.APIKey)
+	client := lichess.NewClient(conf.Credentials.Username)
 
 	ctx := context.TODO()
 
@@ -25,5 +25,5 @@ func main() {
 		return
 		log.Error("Error in main.go")
 	}
-	log.Debugf("Current or last game id for lichess player %s is %s", conf.Credentials.Username, game.ID)
+	log.Infof("Current or last game id for lichess player %s is %s", conf.Credentials.Username, game.ID)
 }

@@ -11,15 +11,13 @@ import (
 
 type Client struct {
 	BaseURL    string
-	apiKey     string
 	Username   string
 	HTTPClient *http.Client
 }
 
-func NewClient(username string, apiKey string) *Client {
+func NewClient(username string) *Client {
 	return &Client{
 		BaseURL:  "https://lichess.org/api",
-		apiKey:   apiKey,
 		Username: username,
 		HTTPClient: &http.Client{
 			Timeout: time.Minute,
@@ -38,7 +36,6 @@ func (client Client) GetCurrentGameForUser(ctx context.Context) (*GameRes, error
 	request.WithContext(ctx)
 	request.Header.Set("Content-Type", "application/json")
 	request.Header.Set("Accept", "application/json")
-	request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", client.apiKey))
 
 	result, err := client.HTTPClient.Do(request)
 	if err != nil {
