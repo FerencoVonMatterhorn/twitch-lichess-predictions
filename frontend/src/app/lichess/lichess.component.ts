@@ -1,10 +1,15 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-lichess',
-  templateUrl: './lichess.component.html'
+  templateUrl: './lichess.component.html',
+  styleUrls: ['./lichess.component.css']
 })
-export class LichessComponent {
-  last_game = "123456";
+export class LichessComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 
 }

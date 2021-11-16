@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-twitch',
   templateUrl: './twitch.component.html',
-  styleUrls: ['./twitch.component.scss']
+  styleUrls: ['./twitch.component.css']
 })
 export class TwitchComponent implements OnInit {
 
