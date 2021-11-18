@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
-	"github.com/ferencovonmatterhorn/twitch-lichess-predictions/pkg/config"
-	"github.com/ferencovonmatterhorn/twitch-lichess-predictions/pkg/lichess"
-	"github.com/ferencovonmatterhorn/twitch-lichess-predictions/pkg/twitch"
+	"github.com/ferencovonmatterhorn/twitch-lichess-predictions/backend/pkg/config"
+	"github.com/ferencovonmatterhorn/twitch-lichess-predictions/backend/pkg/lichess"
+	"github.com/ferencovonmatterhorn/twitch-lichess-predictions/backend/pkg/twitch"
 	log "github.com/sirupsen/logrus"
 )
 

@@ -1,4 +1,4 @@
-module github.com/ferencovonmatterhorn/twitch-lichess-predictions
+module github.com/ferencovonmatterhorn/twitch-lichess-predictions/backend
 
 go 1.16
 
