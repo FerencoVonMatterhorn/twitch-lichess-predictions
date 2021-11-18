@@ -38,3 +38,8 @@ As this project is currently in WIP status, the project setup will be added in t
 ## Future scope
 
 Working Tool which creates Twitch predictions by starting a new chess game.
+
+## Version 2.0
+
+As Twitch only allows to create predictions with a User Access Token, and these can only be created by using an OIDC or OAuth Authorization Code Flow, a frontend was added and the backend functionality has to be changed completely. <br>
+This means the Go backend will be refactored to use JWT tokens to communicate with the frontend in order to create User Access Tokens.
