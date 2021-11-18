@@ -24,10 +24,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o twitch-lichess-predictions.linux_x86_64
-          GOOS=windows GOARCH=386 CGO_ENABLED=0 go build -o twitch-lichess-predictions.windows_i386.exe
-          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -o twitch-lichess-predictions.windows_x86_64.exe
-          GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 go build -o twitch-lichess-predictions.darwin_x86_64
+          GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o twitch-lichess-predictions.linux_x86_64 ./backend
+          GOOS=windows GOARCH=386 CGO_ENABLED=0 go build -o twitch-lichess-predictions.windows_i386.exe ./backend
+          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -o twitch-lichess-predictions.windows_x86_64.exe ./backend
+          GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 go build -o twitch-lichess-predictions.darwin_x86_64 ./backend
 
       - name: Release
         env:
